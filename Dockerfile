@@ -13,6 +13,7 @@ RUN curl -L --silent -o webhook.tar.gz https://github.com/adnanh/webhook/archive
 FROM docker/compose
 COPY --from=build /usr/local/bin/webhook /usr/local/bin/webhook
 RUN apk add --no-cache git
-WORKDIR /src
+WORKDIR /srv/site
 EXPOSE 9000
 CMD ["/usr/local/bin/webhook"]
+

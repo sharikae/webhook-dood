@@ -5,10 +5,10 @@ services:
     build: .
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /srv/site:/src
+      - /srv/site:/srv/site
     ports:
       - "32000:9000"
-    command: webhook -hooks /src/.deploy/hook.json -template -verbose
+    command: webhook -hooks /srv/site/.deploy/hook.json -template -verbose
     env_file:
       - .env
     restart: unless-stopped
@@ -17,3 +17,4 @@ services:
       options:
         max-size: '10m'
         max-file: '10'
+
