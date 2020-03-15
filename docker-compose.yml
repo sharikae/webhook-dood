@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  webhook-dood:
+    build: .
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/site:/src
+    ports:
+      - "32000:9000"
+    command: webhook -hooks /src/.deploy/hook.json -template -verbose
+    env_file:
+      - .env
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: '10m'
+        max-file: '10'
